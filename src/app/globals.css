@@ -1,0 +1,101 @@
+/*
+ * Layer order: Tailwind's theme and utilities are layered, Ant Design's CSS-in-JS
+ * is unlayered. Tailwind Preflight is intentionally NOT imported so it cannot
+ * reset Ant Design component styles; the minimal base below replaces it.
+ */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* RoomBook design tokens (from the design system's tokens.json). */
+@theme {
+  --color-canvas: #f3f1ec;
+  --color-surface: #ffffff;
+  --color-line: #d9d5cb;
+  --color-line-strong: #857f70;
+  --color-ink: #15171c;
+  --color-ink-muted: #5a5f69;
+  --color-accent: #1f4fd8;
+  --color-accent-soft: #e3eafc;
+  --color-on-accent: #ffffff;
+  --color-danger: #b3261e;
+
+  /* Below this width the calendar collapses into a dialog (design: «Телефон: календарь открыт»). */
+  --breakpoint-desk: 55rem;
+
+  --font-sans: var(--font-onest), 'Golos Text', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-pop: 0 4px 8px #15171c14, 0 16px 32px -4px #15171c29;
+  --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #1f4fd8;
+
+  /* Typography scale */
+  --text-display: 32px;
+  --text-display--line-height: 40px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 700;
+  --text-heading: 20px;
+  --text-heading--line-height: 28px;
+  --text-heading--letter-spacing: -0.01em;
+  --text-heading--font-weight: 600;
+  --text-title: 16px;
+  --text-title--line-height: 24px;
+  --text-title--font-weight: 600;
+  --text-body: 15px;
+  --text-body--line-height: 22px;
+  --text-label: 13px;
+  --text-label--line-height: 18px;
+  --text-label--font-weight: 600;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-caption--letter-spacing: 0.01em;
+  --text-caption--font-weight: 500;
+
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 22px;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, p {
+    margin: 0;
+  }
+
+  button {
+    font: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
